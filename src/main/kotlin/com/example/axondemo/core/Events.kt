@@ -1,4 +1,4 @@
-package com.example.jpaaxondemo.core
+package com.example.axondemo.core
 
 data class ApplicationCreatedEvent(
     val id: String

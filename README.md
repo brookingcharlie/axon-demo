@@ -1,6 +1,6 @@
-# jpa-axon-demo
+# axon-demo
 
-Axon demo using simple JPA persistence (not event sourcing)
+Axon demo with branches for event-sourced and JPA persistence
 
 ## Usage
 

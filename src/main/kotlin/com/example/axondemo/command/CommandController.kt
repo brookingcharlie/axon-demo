@@ -1,7 +1,7 @@
-package com.example.jpaaxondemo.command
+package com.example.axondemo.command
 
-import com.example.jpaaxondemo.core.CreateApplicationCommand
-import com.example.jpaaxondemo.core.SubmitPersonalDetailsCommand
+import com.example.axondemo.core.CreateApplicationCommand
+import com.example.axondemo.core.SubmitPersonalDetailsCommand
 import org.axonframework.commandhandling.gateway.CommandGateway
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.PathVariable

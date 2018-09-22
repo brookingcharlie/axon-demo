@@ -1,4 +1,4 @@
-package com.example.jpaaxondemo
+package com.example.axondemo
 
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -7,10 +7,8 @@ import org.springframework.test.context.junit4.SpringRunner
 
 @RunWith(SpringRunner::class)
 @SpringBootTest
-class SimpleAxonDemoApplicationTests {
-
+class ApplicationTests {
 	@Test
 	fun contextLoads() {
 	}
-
 }

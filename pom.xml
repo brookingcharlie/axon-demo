@@ -4,12 +4,12 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.example</groupId>
-	<artifactId>jpa-axon-demo</artifactId>
+	<artifactId>axon-demo</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>jpa-axon-demo</name>
-	<description>Axon demo using simple JPA persistence (not event sourcing)</description>
+	<name>axon-demo</name>
+	<description>Axon demo with branches for event-sourced and JPA persistence</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>

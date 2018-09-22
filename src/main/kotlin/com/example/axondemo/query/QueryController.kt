@@ -1,4 +1,4 @@
-package com.example.jpaaxondemo.query
+package com.example.axondemo.query
 
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.GetMapping

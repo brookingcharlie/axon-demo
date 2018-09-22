@@ -1,4 +1,4 @@
-package com.example.jpaaxondemo.core
+package com.example.axondemo.core
 
 import org.axonframework.commandhandling.TargetAggregateIdentifier
 

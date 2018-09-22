@@ -1,9 +1,9 @@
-package com.example.jpaaxondemo.command
+package com.example.axondemo.command
 
-import com.example.jpaaxondemo.core.ApplicationCreatedEvent
-import com.example.jpaaxondemo.core.CreateApplicationCommand
-import com.example.jpaaxondemo.core.PersonalDetailsSubmittedEvent
-import com.example.jpaaxondemo.core.SubmitPersonalDetailsCommand
+import com.example.axondemo.core.ApplicationCreatedEvent
+import com.example.axondemo.core.CreateApplicationCommand
+import com.example.axondemo.core.PersonalDetailsSubmittedEvent
+import com.example.axondemo.core.SubmitPersonalDetailsCommand
 import org.axonframework.commandhandling.CommandHandler
 import org.axonframework.commandhandling.model.AggregateIdentifier
 import org.axonframework.commandhandling.model.AggregateLifecycle

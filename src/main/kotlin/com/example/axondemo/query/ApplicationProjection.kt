@@ -1,7 +1,7 @@
-package com.example.jpaaxondemo.query
+package com.example.axondemo.query
 
-import com.example.jpaaxondemo.core.ApplicationCreatedEvent
-import com.example.jpaaxondemo.core.PersonalDetailsSubmittedEvent
+import com.example.axondemo.core.ApplicationCreatedEvent
+import com.example.axondemo.core.PersonalDetailsSubmittedEvent
 import org.axonframework.eventhandling.EventHandler
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.jpa.repository.JpaRepository

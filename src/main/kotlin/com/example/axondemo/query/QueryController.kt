@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RestController
 import java.util.stream.Collectors.toList
 
 @RestController
-class QueryController(@Autowired private val repository: ApplicationViewRepository) {
+class QueryController(@Autowired private val repository: LoanApplicationViewRepository) {
     @GetMapping("/applications")
     fun participantsInRoom(): List<String> {
         return repository.findAll()

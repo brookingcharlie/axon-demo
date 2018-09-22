@@ -2,7 +2,7 @@ package com.example.axondemo.core
 
 import org.axonframework.commandhandling.TargetAggregateIdentifier
 
-data class CreateApplicationCommand(
+data class CreateLoanApplicationCommand(
     @TargetAggregateIdentifier val id: String
 )
 

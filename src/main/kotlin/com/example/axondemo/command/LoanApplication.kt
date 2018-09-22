@@ -1,7 +1,7 @@
 package com.example.axondemo.command
 
-import com.example.axondemo.core.ApplicationCreatedEvent
-import com.example.axondemo.core.CreateApplicationCommand
+import com.example.axondemo.core.LoanApplicationCreatedEvent
+import com.example.axondemo.core.CreateLoanApplicationCommand
 import com.example.axondemo.core.PersonalDetailsSubmittedEvent
 import com.example.axondemo.core.SubmitPersonalDetailsCommand
 import org.axonframework.commandhandling.CommandHandler
@@ -13,9 +13,9 @@ import org.slf4j.LoggerFactory
 import java.io.Serializable
 
 @Aggregate
-class Application() : Serializable {
+class LoanApplication() : Serializable {
     companion object {
-        private val logger = LoggerFactory.getLogger(Application::class.java)
+        private val logger = LoggerFactory.getLogger(LoanApplication::class.java)
     }
 
     @AggregateIdentifier
@@ -25,8 +25,8 @@ class Application() : Serializable {
     var givenNames: String? = null
 
     @CommandHandler
-    constructor(command: CreateApplicationCommand): this() {
-        AggregateLifecycle.apply(ApplicationCreatedEvent(command.id))
+    constructor(command: CreateLoanApplicationCommand): this() {
+        AggregateLifecycle.apply(LoanApplicationCreatedEvent(command.id))
     }
 
     @CommandHandler
@@ -35,7 +35,7 @@ class Application() : Serializable {
     }
 
     @EventSourcingHandler
-    protected fun on(event: ApplicationCreatedEvent) {
+    protected fun on(event: LoanApplicationCreatedEvent) {
         logger.debug("Applying ${event}")
         this.id = event.id
     }

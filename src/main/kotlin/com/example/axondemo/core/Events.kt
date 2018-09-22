@@ -1,6 +1,6 @@
 package com.example.axondemo.core
 
-data class ApplicationCreatedEvent(
+data class LoanApplicationCreatedEvent(
     val id: String
 )
 

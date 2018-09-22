@@ -10,9 +10,8 @@ class QueryController(@Autowired private val repository: ApplicationViewReposito
     @GetMapping("/applications")
     fun participantsInRoom(): List<String> {
         return repository.findAll()
-                .stream()
-                .map { p -> p.id }
-                .sorted()
-                .collect(toList())
+            .stream()
+            .map { "${it.id} by ${it.givenNames} ${it.familyName}" }
+            .collect(toList())
     }
 }

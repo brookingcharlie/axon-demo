@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration
 @Configuration
 class SimpleAxonConfiguration {
     @Bean
-    fun eventSerializer(objectMapper: ObjectMapper): Serializer{
+    fun eventSerializer(objectMapper: ObjectMapper): Serializer {
         objectMapper.registerKotlinModule()
         return JacksonSerializer(objectMapper)
     }

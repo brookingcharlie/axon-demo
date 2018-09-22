@@ -1,6 +1,7 @@
 package com.example.jpaaxondemo.query
 
 import com.example.jpaaxondemo.core.ApplicationCreatedEvent
+import com.example.jpaaxondemo.core.PersonalDetailsSubmittedEvent
 import org.axonframework.eventhandling.EventHandler
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.jpa.repository.JpaRepository
@@ -12,6 +13,10 @@ import javax.persistence.Id
 class ApplicationView() {
     @Id
     lateinit var id: String
+
+    var familyName: String? = null
+
+    var givenNames: String? = null
 
     constructor(id: String) : this() {
         this.id = id
@@ -25,5 +30,12 @@ class ApplicationProjection(@Autowired private val repository: ApplicationViewRe
     @EventHandler
     fun on(event: ApplicationCreatedEvent) {
         repository.save(ApplicationView(event.id))
+    }
+
+    @EventHandler
+    fun on(event: PersonalDetailsSubmittedEvent) {
+        val application = repository.getOne(event.applicationId)
+        application.familyName = event.familyName
+        application.givenNames = event.givenNames
     }
 }

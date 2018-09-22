@@ -1,5 +1,6 @@
 package com.example.axondemo.query
 
+import com.example.axondemo.core.DocumentAttachedEvent
 import com.example.axondemo.core.LoanApplicationCreatedEvent
 import com.example.axondemo.core.PersonalDetailsSubmittedEvent
 import org.axonframework.eventhandling.EventHandler
@@ -18,5 +19,11 @@ class LoanApplicationProjection(@Autowired private val repository: LoanApplicati
         val application = repository.getOne(event.applicationId)
         application.familyName = event.familyName
         application.givenNames = event.givenNames
+    }
+
+    @EventHandler
+    fun on(event: DocumentAttachedEvent) {
+        val application = repository.getOne(event.applicationId)
+        application.documents.add(DocumentView(application = application, id = event.id, name = event.name, content = event.content))
     }
 }

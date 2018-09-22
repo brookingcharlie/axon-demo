@@ -11,3 +11,10 @@ data class SubmitPersonalDetailsCommand(
     val familyName: String,
     val givenNames: String
 )
+
+data class AttachDocumentCommand(
+    @TargetAggregateIdentifier val applicationId: String,
+    val id: String,
+    val name: String,
+    val content: String
+)

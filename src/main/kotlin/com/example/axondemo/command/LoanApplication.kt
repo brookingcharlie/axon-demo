@@ -1,9 +1,6 @@
 package com.example.axondemo.command
 
-import com.example.axondemo.core.LoanApplicationCreatedEvent
-import com.example.axondemo.core.CreateLoanApplicationCommand
-import com.example.axondemo.core.PersonalDetailsSubmittedEvent
-import com.example.axondemo.core.SubmitPersonalDetailsCommand
+import com.example.axondemo.core.*
 import org.axonframework.commandhandling.CommandHandler
 import org.axonframework.commandhandling.model.AggregateIdentifier
 import org.axonframework.commandhandling.model.AggregateLifecycle
@@ -18,11 +15,15 @@ class LoanApplication() : Serializable {
         private val logger = LoggerFactory.getLogger(LoanApplication::class.java)
     }
 
+    class Document(val id: String, val name: String, val content: String)
+
     @AggregateIdentifier
     lateinit var id: String
 
     var familyName: String? = null
     var givenNames: String? = null
+
+    var documents: MutableList<Document> = mutableListOf()
 
     @CommandHandler
     constructor(command: CreateLoanApplicationCommand): this() {
@@ -31,7 +32,12 @@ class LoanApplication() : Serializable {
 
     @CommandHandler
     fun handle(command: SubmitPersonalDetailsCommand) {
-        AggregateLifecycle.apply(PersonalDetailsSubmittedEvent(command.applicationId, command.familyName, command.givenNames))
+        AggregateLifecycle.apply(PersonalDetailsSubmittedEvent(this.id, command.familyName, command.givenNames))
+    }
+
+    @CommandHandler
+    fun handle(command: AttachDocumentCommand) {
+        AggregateLifecycle.apply(DocumentAttachedEvent(this.id, command.id, command.name, command.content))
     }
 
     @EventSourcingHandler
@@ -45,5 +51,11 @@ class LoanApplication() : Serializable {
         logger.debug("Applying ${event}")
         this.familyName = event.familyName
         this.givenNames = event.givenNames
+    }
+
+    @EventSourcingHandler
+    protected fun on(event: DocumentAttachedEvent) {
+        logger.debug("Applying ${event}")
+        this.documents.add(Document(event.id, event.name, event.content))
     }
 }

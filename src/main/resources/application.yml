@@ -15,4 +15,4 @@ spring:
 logging:
   level:
     org.axonframework: INFO
-    com.example.jpaaxondemo: DEBUG
+    com.example.axondemo: DEBUG

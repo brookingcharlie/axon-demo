@@ -1,5 +1,6 @@
 package com.example.axondemo.command
 
+import com.example.axondemo.core.AttachDocumentCommand
 import com.example.axondemo.core.CreateLoanApplicationCommand
 import com.example.axondemo.core.SubmitPersonalDetailsCommand
 import org.axonframework.commandhandling.gateway.CommandGateway
@@ -23,6 +24,12 @@ class CommandController(@Autowired val commandGateway: CommandGateway) {
         return commandGateway.send(SubmitPersonalDetailsCommand(applicationId, body.familyName, body.givenNames))
     }
 
+    @PostMapping("/applications/{applicationId}/documents")
+    fun attachDocument(@PathVariable applicationId: String, @RequestBody body: AttachDocumentRequest): Future<Void> {
+        return commandGateway.send(AttachDocumentCommand(applicationId, body.id, body.name, body.content))
+    }
+
     data class CreateLoanApplicationRequest(val id: String)
     data class SubmitPersonalDetailsRequest(val familyName: String, val givenNames: String)
+    data class AttachDocumentRequest(val id: String, val name: String, val content: String)
 }

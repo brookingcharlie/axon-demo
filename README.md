@@ -20,3 +20,10 @@ Access the H2 console at <http://localhost:8080/h2_console/>
 * JDBC URL: jdbc:h2:file:./h2/testdb
 * Username: sa
 * Password: (blank)
+
+Example query to see events:
+
+```
+SELECT TYPE, AGGREGATE_IDENTIFIER, SEQUENCE_NUMBER, UTF8TOSTRING(PAYLOAD)
+FROM DOMAIN_EVENT_ENTRY
+```

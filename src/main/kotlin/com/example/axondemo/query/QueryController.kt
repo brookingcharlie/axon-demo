@@ -5,9 +5,9 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-class QueryController(@Autowired private val repository: LoanApplicationViewRepository) {
+class QueryController(@Autowired private val repository: LoanApplicationRepository) {
     @GetMapping("/applications")
-    fun participantsInRoom(): List<String> {
+    fun list(): List<String> {
         return repository.findAll()
             .map { app ->
                 "${app.id} by ${app.givenNames} ${app.familyName} " +

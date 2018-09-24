@@ -2,6 +2,9 @@
 
 Axon demo with branches for event-sourced and JPA persistence
 
+* To see Event Sourcing in action, browse the [master](https://github.com/brookingcharlie/axon-demo/tree/master) branch.
+* To see use of a Standard Repository that persists only the current state, browse the [master](https://github.com/brookingcharlie/axon-demo/tree/standard-repository) branch.
+
 ## Usage
 
 Run the `main` method as a Java application.

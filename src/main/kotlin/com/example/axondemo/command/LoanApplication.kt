@@ -1,9 +1,10 @@
 package com.example.axondemo.command
 
-import com.example.axondemo.core.*
-import org.axonframework.commandhandling.CommandHandler
+import com.example.axondemo.core.DocumentAttachedEvent
+import com.example.axondemo.core.LoanApplicationCreatedEvent
+import com.example.axondemo.core.PersonalDetailsSubmittedEvent
 import org.axonframework.commandhandling.model.AggregateIdentifier
-import org.axonframework.commandhandling.model.AggregateLifecycle
+import org.axonframework.commandhandling.model.AggregateLifecycle.apply
 import org.axonframework.eventsourcing.EventSourcingHandler
 import org.axonframework.spring.stereotype.Aggregate
 import org.slf4j.LoggerFactory
@@ -25,22 +26,16 @@ class LoanApplication() : Serializable {
 
     var documents: MutableList<Document> = mutableListOf()
 
-    @CommandHandler
-    constructor(command: CreateLoanApplicationCommand): this() {
-        AggregateLifecycle.apply(LoanApplicationCreatedEvent(command.id))
-        logger.debug("Finished processing $command")
+    constructor(id: String) : this() {
+        apply(LoanApplicationCreatedEvent(id))
     }
 
-    @CommandHandler
-    fun handle(command: SubmitPersonalDetailsCommand) {
-        AggregateLifecycle.apply(PersonalDetailsSubmittedEvent(this.id, command.familyName, command.givenNames))
-        logger.debug("Finished processing $command")
+    fun setPersonalDetails(familyName: String, givenNames: String) {
+        apply(PersonalDetailsSubmittedEvent(this.id, familyName, givenNames))
     }
 
-    @CommandHandler
-    fun handle(command: AttachDocumentCommand) {
-        AggregateLifecycle.apply(DocumentAttachedEvent(this.id, command.id, command.name, command.content))
-        logger.debug("Finished processing $command")
+    fun attachDocument(id: String, name: String, content: String) {
+        apply(DocumentAttachedEvent(this.id, id, name, content))
     }
 
     @EventSourcingHandler

@@ -27,18 +27,21 @@ class LoanApplication() : Serializable {
 
     @CommandHandler
     constructor(command: CreateLoanApplicationCommand): this() {
+        logger.debug("Started processing $command")
         AggregateLifecycle.apply(LoanApplicationCreatedEvent(command.id))
         logger.debug("Finished processing $command")
     }
 
     @CommandHandler
     fun handle(command: SubmitPersonalDetailsCommand) {
+        logger.debug("Started processing $command")
         AggregateLifecycle.apply(PersonalDetailsSubmittedEvent(this.id, command.familyName, command.givenNames))
         logger.debug("Finished processing $command")
     }
 
     @CommandHandler
     fun handle(command: AttachDocumentCommand) {
+        logger.debug("Started processing $command")
         AggregateLifecycle.apply(DocumentAttachedEvent(this.id, command.id, command.name, command.content))
         logger.debug("Finished processing $command")
     }

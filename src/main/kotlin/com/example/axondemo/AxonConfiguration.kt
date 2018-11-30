@@ -8,9 +8,16 @@ import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.Primary
+import org.axonframework.config.EventProcessingConfiguration
+import org.springframework.beans.factory.annotation.Autowired
+import javax.annotation.PostConstruct
+
 
 @Configuration
 class AxonConfiguration {
+    @Autowired
+    private lateinit var eventProcessingConfiguration: EventProcessingConfiguration
+
     @Primary
     @Bean
     fun serializer(objectMapper: ObjectMapper): Serializer {
@@ -30,5 +37,10 @@ class AxonConfiguration {
     fun messageSerializer(objectMapper: ObjectMapper): Serializer {
         objectMapper.registerKotlinModule()
         return JacksonSerializer(objectMapper)
+    }
+
+    @PostConstruct
+    fun configureEventProcessing() {
+        eventProcessingConfiguration.registerTrackingEventProcessor("com.example.axondemo.anotherquery")
     }
 }

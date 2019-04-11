@@ -15,13 +15,9 @@ class Application {
     var course: String? = null
     var submitted: Boolean = false
 
-    constructor() {
-        logger.debug("constructor()")
-    }
-
     @CommandHandler
     constructor(command: CreateApplication) {
-        logger.debug("constructor($command)")
+        logger.debug("handle($command)")
         val id = IdentifierFactory.getInstance().generateIdentifier()
         apply(ApplicationCreated(id, command.customer))
     }
@@ -44,22 +40,26 @@ class Application {
         apply(ApplicationSubmitted(this.id))
     }
 
+    constructor() {
+        logger.debug("constructor()")
+    }
+
     @EventSourcingHandler
-    fun on(event: ApplicationCreated) {
-        logger.debug("on($event)")
+    fun source(event: ApplicationCreated) {
+        logger.debug("source($event)")
         this.id = event.applicationId
         this.customer = event.customer
     }
 
     @EventSourcingHandler
-    fun on(event: CourseSelected) {
-        logger.debug("on($event)")
+    fun source(event: CourseSelected) {
+        logger.debug("source($event)")
         this.course = event.course
     }
 
     @EventSourcingHandler
-    fun on(event: ApplicationSubmitted) {
-        logger.debug("on($event)")
+    fun source(event: ApplicationSubmitted) {
+        logger.debug("source($event)")
         this.submitted = true
     }
 

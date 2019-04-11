@@ -12,20 +12,20 @@ import org.springframework.stereotype.Component
 @Component
 class ApplicationProjection2(@Autowired private val repository: ApplicationViewRepository2) {
     @EventHandler
-    fun on(event: ApplicationCreated) {
-        logger.debug("on($event)")
+    fun project(event: ApplicationCreated) {
+        logger.debug("project($event)")
         repository.save(ApplicationView2().apply { id = event.applicationId; customer = event.customer })
     }
 
     @EventHandler
-    fun on(event: CourseSelected) {
-        logger.debug("on($event)")
+    fun project(event: CourseSelected) {
+        logger.debug("project($event)")
         repository.getOne(event.applicationId).apply { course = event.course }
     }
 
     @EventHandler
-    fun on(event: ApplicationSubmitted) {
-        logger.debug("on($event)")
+    fun project(event: ApplicationSubmitted) {
+        logger.debug("project($event)")
         throw Exception("Deliberate submitted failure to test transactions")
     }
 

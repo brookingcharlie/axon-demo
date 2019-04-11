@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController
 class CommandController(@Autowired val commandGateway: CommandGateway) {
     @PostMapping("/applications")
     fun create(@RequestHeader("Authorization") customer: String): CreateApplicationResponse {
-        logger.debug("create($customer)")
+        logger.debug("request(create($customer))")
         val id = commandGateway.sendAndWait<String>(CreateApplication(customer))
         return CreateApplicationResponse(id)
     }
@@ -27,7 +27,7 @@ class CommandController(@Autowired val commandGateway: CommandGateway) {
             @PathVariable("applicationId") applicationId: String,
             @RequestBody request: SelectCourseRequest
     ) {
-        logger.debug("selectCourse($customer, $applicationId, $request)")
+        logger.debug("request(selectCourse($customer, $applicationId, $request))")
         commandGateway.sendAndWait<Void>(SelectCourse(applicationId, request.course, customer))
     }
 
@@ -36,7 +36,7 @@ class CommandController(@Autowired val commandGateway: CommandGateway) {
             @RequestHeader("Authorization") customer: String,
             @PathVariable("applicationId") applicationId: String
     ) {
-        logger.debug("submit($customer, $applicationId)")
+        logger.debug("request(submit($customer, $applicationId))")
         commandGateway.sendAndWait<Void>(SubmitApplication(applicationId, customer))
     }
 
